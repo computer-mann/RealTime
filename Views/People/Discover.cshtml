@@ -1,0 +1,99 @@
+@model IEnumerable<DiscoverViewModel>
+@{
+    ViewData["Title"] = "Discover";
+}
+@section CustomStyles{
+    <!-- app favicon -->
+    <link rel="shortcut icon" href="~/assets/img/favicon.ico">
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <!-- plugin stylesheets -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors.css" />
+    <!-- app style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/discover.css" />
+    <style>
+
+    </style>
+}
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card card-statistics">
+                                    <div class="card-body p-0">
+                                        <div class="row no-gutters">
+                                            <div class="col-xl-12 col-xxl-12">
+                                                <div class="app-chat-sidebar border-right border-md-n h-100">
+                                                    <div class="app-chat-sidebar-search px-4 pb-4 pt-4 border-bottom">
+                                                        <div class="input-group">
+                                                            <input aria-describedby="basic-addon1" class="form-control border-right-0" placeholder="Search..." type="text">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="basic-addon1">
+                                                                        <i class="ti ti-search magnifier"></i>
+                                                                    </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @foreach (var item in Model)
+                                                    {
+                                                        
+                                                        @if(item.OnlineStatus)
+                                                        {
+                                                            <div class="app-chat-sidebar-user scrollbar scroll_dark">
+                                                              <div  class="app-chat-sidebar-user-item">
+                                                                 <a asp-action="ToFirstTimeDirectMessage" asp-controller="DirectMessages" asp-route-userId="@item.UserId" asp-route-chatId="@item.ChatId">
+                                                                <div class="d-flex active">
+                                                                    <div>
+                                                                        <div class="bg-img">
+                                                                            <img class="img-fluid" src="~/assets/img/avtar/01.jpg" alt="user">
+                                                                            <i class="bg-img-status bg-success"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div>
+                                                                        <h5 class="mb-0">@item.Username</h5>
+                                                                    </div>
+                                                                   <span id="onlineStatus">Online</span>
+                                                                  </div>
+                                                                </a>
+                                                              </div>
+                                                            </div>
+                                                         }else
+                                                         {
+                                                             <div class="app-chat-sidebar-user scrollbar scroll_dark">
+                                                             <div  class="app-chat-sidebar-user-item">
+                                                                <a asp-action="ToFirstTimeDirectMessage" asp-controller="DirectMessages" asp-route-userId="@item.UserId" asp-route-chatId="@item.ChatId">
+                                                                 <div class="d-flex">
+                                                                    <div class="bg-img">
+                                                                        <img class="img-fluid" src="~/assets/img/avtar/09.jpg" alt="user">
+                                                                        <i class="bg-img-status bg-danger"></i>
+                                                                    </div>
+                                                                    <div>
+                                                                        <h5 class="mb-0">@item.Username</h5>                                                                        
+                                                                    </div>    
+                                                                    <span id="offlineStatus">Offline</span>
+                                                                </div>
+                                                                </a>
+                                                            </div>
+                                                             </div>
+                                                            <br></br>
+                                                         }
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+
+@section CustomScripts{
+    <!-- plugins -->
+    <script src="~/assets/js/vendors.js"></script>
+    
+    <!-- custom app -->
+    <script src="~/assets/js/app.js">
+    </script>
+    <script defer src="~/js/discover.js"></script>
+}

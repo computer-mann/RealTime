@@ -1,0 +1,291 @@
+@model List<AllUserMessagesViewModel>
+@{
+    ViewData["Title"] = "All Messages";
+}
+@section CustomStyles{
+    <!-- app favicon -->
+    <link rel="shortcut icon" href="~/assets/img/favicon.ico">
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <!-- plugin stylesheets -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors.css" />
+    <!-- app style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/style.css" />
+    <style>
+
+    </style>
+}
+
+
+    <!-- begin app -->
+    <div class="app">
+        <!-- begin app-wrap -->
+        <div class="app-wrap">
+            <!-- begin pre-loader -->
+            <div class="loader">
+                <div class="h-100 d-flex justify-content-center">
+                    <div class="align-self-center">
+                        <img alt="loader" src="~/assets/img/loader/loader.svg" />
+                    </div>
+                </div>
+            </div>
+ 
+                <div style="position:relative;top:-6px;" class="app-main" id="main">
+                    <!-- begin container-fluid -->
+                    <div class="">
+                        <!-- begin row -->
+                        <div class="row">
+                            <div class="col-md-12 m-b-20">
+                                <!-- begin page title -->
+                                <div class="d-block d-sm-flex flex-nowrap align-items-center">
+                                    <div class="page-title  mb-sm-0">
+                                        <h3>All Messages</h3>
+                                    </div>
+                                </div>
+                                <!-- end page title -->
+                            </div>
+                        </div>
+                        <!-- end row -->
+                        <!--mail-read-contant-start-->
+                       
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card card-statistics">
+                                    <div class="card-body p-0">
+                                        <div class="row no-gutters">
+                                            <div class="col-xl-12 col-xxl-12">
+                                                <div class="app-chat-sidebar border-right border-md-n h-100">
+                                                    <div class="app-chat-sidebar-search px-4 pb-4 pt-4 border-bottom">
+                                                        <div class="input-group">
+                                                            <input aria-describedby="basic-addon1" class="form-control border-right-0" placeholder="Search..." type="text">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="basic-addon1">
+                                                                        <i class="ti ti-search magnifier"></i>
+                                                                    </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                     @if(Model.Count == 0)
+                                                        {
+                                                            <br><br>
+                                                            <h4 class="text-center">No Messages</h4>
+                                                        }
+                                                        else{
+                                                    <div class="app-chat-sidebar-user scrollbar scroll_dark">
+                                                        <div class="app-chat-sidebar-user-item">
+                                                            <a href="javascript:void(0)">
+                                                                <div class="d-flex active">
+                                                                    <div>
+                                                                        <div class="bg-img">
+                                                                            <img class="img-fluid" src="~/assets/img/avtar/01.jpg" alt="user">
+                                                                            <i class="bg-img-status bg-success"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div>
+                                                                        <h5 class="mb-0">Demian Leyon</h5>
+                                                                        <p class="text-white"><span><i class="zmdi zmdi-check mr-2"></i></span>I need some money</p>
+                                                                        <div class="d-xl-none">
+                                                                            <small>Just now</small>
+                                                                            <span class="badge badge-success">5</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="ml-auto text-right d-none d-xl-block">
+                                                                        <small>Just now</small>
+                                                                        <span class="badge badge-success">5</span>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        <div class="app-chat-sidebar-user-item">
+                                                            <a href="javascript:void(0)">
+                                                                <div class="d-flex">
+                                                                    <div class="bg-img">
+                                                                        <img class="img-fluid" src="~/assets/img/avtar/02.jpg" alt="user">
+                                                                    </div>
+                                                                    <div>
+                                                                        <h5 class="mb-0">Jennyns Leyon</h5>
+                                                                        <p><span><i class="zmdi zmdi-check mr-2"></i></span>How are you</p>
+                                                                        <small class="d-xl-none">yesterday</small>
+                                                                    </div>
+                                                                    <div class="ml-auto text-right d-none d-xl-block">
+                                                                        <small>yesterday</small>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        <div class="app-chat-sidebar-user-item">
+                                                            <a href="javascript:void(0)">
+                                                                <div class="d-flex">
+                                                                    <div class="bg-img">
+                                                                        <img class="img-fluid" src="~/assets/img/avtar/03.jpg" alt="user">
+                                                                        <i class="bg-img-status bg-success"></i>
+                                                                    </div>
+                                                                    <div>
+                                                                        <h5 class="mb-0">Smithmin Leyon </h5>
+                                                                        <p><span><i class="zmdi zmdi-check-all mr-2"></i></span>Thanks</p>
+                                                                        <div class="d-xl-none">
+                                                                            <small>30 Aug</small>
+                                                                            <span class="badge badge-success">35</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="ml-auto text-right d-none d-xl-block">
+                                                                        <small>30 Aug</small>
+                                                                        <span class="badge badge-success">35</span>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        <div class="app-chat-sidebar-user-item">
+                                                            <a href="javascript:void(0)">
+                                                                <div class="d-flex">
+                                                                    <div class="bg-img">
+                                                                        <img class="img-fluid" src="~/assets/img/avtar/04.jpg" alt="user">
+                                                                        <i class="bg-img-status bg-danger"></i>
+                                                                    </div>
+                                                                    <div>
+                                                                        <h5 class="mb-0">Brianing Leyon</h5>
+                                                                        <p><span><i class="zmdi zmdi-check mr-2"></i></span> You will sail along until you...</p>
+                                                                        <div class="d-xl-none">
+                                                                            <small>25 Aug</small> <span class="badge badge-success">15</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="ml-auto text-right d-none d-xl-block">
+                                                                        <small>25 Aug</small> <span class="badge badge-success">15</span>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        <div class="app-chat-sidebar-user-item">
+                                                            <a href="javascript:void(0)">
+                                                                <div class="d-flex">
+                                                                    <div>
+                                                                        <div class="bg-img">
+                                                                            <img class="img-fluid" src="~/assets/img/avtar/05.jpg" alt="user">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div>
+                                                                        <h5 class="mb-0">Adrianing Leyon</h5>
+                                                                        <p><span><i class="zmdi zmdi-check mr-2"></i></span>Hi...</p>
+                                                                        <small class="d-xl-none">20 Aug</small>
+                                                                    </div>
+                                                                    <div class="ml-auto text-right d-none d-xl-block">
+                                                                        <small>20 Aug</small>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        <div class="app-chat-sidebar-user-item">
+                                                            <a href="javascript:void(0)">
+                                                                <div class="d-flex">
+                                                                    <div class="bg-img">
+                                                                        <img class="img-fluid" src="~/assets/img/avtar/06.jpg" alt="user">
+                                                                        <i class="bg-img-status bg-success"></i>
+                                                                    </div>
+                                                                    <div>
+                                                                        <h5 class="mb-0">Garydmi Leyon</h5>
+                                                                        <p><span><i class="zmdi zmdi-check-all mr-2"></i></span>Thanks</p>
+                                                                        <div class="d-xl-none">
+                                                                            <small>15 Aug</small>
+                                                                            <span class="badge badge-success">45</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="ml-auto text-right d-none d-xl-block">
+                                                                        <small>15 Aug</small>
+                                                                        <span class="badge badge-success">45</span>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        <div class="app-chat-sidebar-user-item">
+                                                            <a href="javascript:void(0)">
+                                                                <div class="d-flex">
+                                                                    <div class="bg-img">
+                                                                        <img class="img-fluid" src="~/assets/img/avtar/07.jpg" alt="user">
+                                                                    </div>
+                                                                    <div>
+                                                                        <h5 class="mb-0">Andrewvi Leyon</h5>
+                                                                        <p><span><i class="zmdi zmdi-check mr-2"></i></span>Hello...</p>
+                                                                        <div class="d-xl-none">
+                                                                            <small>06 Aug</small>
+                                                                            <span class="badge badge-success">99+</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="ml-auto text-right d-none d-xl-block">
+                                                                        <small>06 Aug</small>
+                                                                        <span class="badge badge-success">99+</span>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        <div class="app-chat-sidebar-user-item">
+                                                            <a href="javascript:void(0)">
+                                                                <div class="d-flex">
+                                                                    <div class="bg-img">
+                                                                        <img class="img-fluid" src="~/assets/img/avtar/08.jpg" alt="user">
+                                                                    </div>
+                                                                    <div>
+                                                                        <h5 class="mb-0">Brainjon Leyon</h5>
+                                                                        <p><span><i class="zmdi zmdi-check mr-2"></i></span>So, make the decision...</p>
+                                                                        <small class="d-xl-none">30 May</small>
+                                                                    </div>
+                                                                    <div class="ml-auto text-right d-none d-xl-block">
+                                                                        <small>30 May</small>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        <div class="app-chat-sidebar-user-item">
+                                                            <a href="javascript:void(0)">
+                                                                <div class="d-flex">
+                                                                    <div class="bg-img">
+                                                                        <img class="img-fluid" src="~/assets/img/avtar/09.jpg" alt="user">
+                                                                        <i class="bg-img-status bg-danger"></i>
+                                                                    </div>
+                                                                    <div>
+                                                                        <h5 class="mb-0">Jimmyimg Leyon</h5>
+                                                                        <p><span><i class="zmdi zmdi-check-all mr-2"></i></span>Okay</p>
+                                                                        <div class="d-xl-none">
+                                                                            <small>30 May</small>
+                                                                            <span class="badge badge-success">25</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="ml-auto text-right d-none d-xl-block">
+                                                                        <small>30 May</small>
+                                                                        <span class="badge badge-success">25</span>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                        }
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!--mail-read-contant-end-->
+                    </div>
+                    <!-- end container-fluid -->
+                </div>
+                <!-- end app-main -->
+            </div>
+            <!-- end app-container -->
+           
+        </div>
+        <!-- end app-wrap -->
+    </div>
+    <!-- end app -->
+
+
+@section CustomScripts{
+    <!-- plugins -->
+    <script src="~/assets/js/vendors.js"></script>
+
+    <!-- custom app -->
+    <script src="~/assets/js/app.js">
+    </script>
+}

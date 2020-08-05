@@ -1,0 +1,10 @@
+#onlineStatus{
+    position: absolute;left:560px;
+    color: #15f327;
+}
+
+#offlineStatus{
+     position: absolute;
+     left:560px;
+     color: #000000;
+}

@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@inject IHttpContextAccessor access; 
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="text-center">
+    <p>Session Id: @ViewBag.SessId</p>
+</div>
+
+<div class="text-center">
+    <p>DateTime in Sesssion: @access.HttpContext.Session.GetString("Noww")</p>
+</div>
+
+<div class="text-center">
+    <p>DateTime in Redis Cache: @ViewBag.RedisData</p>
+</div>
+<p>Learn about <a href="/home/privacy">Privacy</a>.</p>
+
+@section CustomScripts{
+    
+}
+

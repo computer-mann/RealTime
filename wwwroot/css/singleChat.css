@@ -1,0 +1,17 @@
+#sendButton:hover{
+    cursor: pointer;
+    background-color: green;
+}
+
+#scrollDownBtn{
+    position: absolute;
+    left: 550px;
+    top: 770px;
+    border: none;
+    background-color:transparent;
+   /*  z-index: 101; */
+}
+
+#scrollDownBtn:hover{
+    background-color: #bbe494;
+}
