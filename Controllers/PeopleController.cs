@@ -18,17 +18,17 @@ namespace realtime.Controllers
     [Route("[controller]/[action]")]
     public class PeopleController : Controller
     {
-        private readonly InMemoryCacheService cacheService;
+        private readonly InMemoryCacheService inMemoryCacheService;
         private readonly RealTimeContext context;
         private readonly IRedisCache redis;
         private readonly UserManager<AppUser> userManager;
-        public PeopleController(InMemoryCacheService cacheService, IRedisCache redis,
+        public PeopleController(InMemoryCacheService inMemoryCacheService, IRedisCache redis,
         UserManager<AppUser> userManager, RealTimeContext context)
         {
             this.userManager = userManager;
             this.context = context;
             this.redis = redis;
-            this.cacheService = cacheService;
+            this.inMemoryCacheService = inMemoryCacheService;
 
         }
 
@@ -36,7 +36,7 @@ namespace realtime.Controllers
         [Route("/discover")]
         public async Task<IActionResult> Discover()
         {
-            var user=await cacheService.GetOrAddUserToCache(User.Identity.Name,userManager);
+            var user=await inMemoryCacheService.GetOrAddUserToCache(User.Identity.Name,userManager);
             var people=await userManager.Users.Where(ip=>ip.UserName != user.UserName).ToListAsync();
             var discover=new List<DiscoverViewModel>();
              var chatted=await context.UserToUserDMs.Where(op=>op.PrincipalUserId == user.Id)

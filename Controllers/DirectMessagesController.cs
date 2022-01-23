@@ -21,7 +21,7 @@ namespace realtime.Controllers
     [Authorize]
     public class DirectMessagesController : Controller
     {
-        private readonly InMemoryCacheService cacheService;
+        private readonly InMemoryCacheService inMemoryCacheService;
         private readonly UserManager<AppUser> userManager;
         private readonly RealTimeContext context;
         private readonly IHubContext<SingleChatHubContext, ISingleChatClient> hubContext;
@@ -35,7 +35,7 @@ namespace realtime.Controllers
             this.redisCache = redisCache;
             this.context = context;
             this.userManager = userManager;
-            this.cacheService = cacheService;
+            this.inMemoryCacheService = cacheService;
 
         }
 
@@ -43,7 +43,7 @@ namespace realtime.Controllers
         [Route ("/messages")]
         public async Task<IActionResult> Index ()
         {
-            var user = await cacheService.GetOrAddUserToCache (User.Identity.Name, userManager);
+            var user = await inMemoryCacheService.GetOrAddUserToCache (User.Identity.Name, userManager);
             var allUserMessages = await context.UserToUserDMs.Where (io => io.PrincipalUserId == user.Id).
             Include (ui => ui.LatestDirectMessage).ToListAsync ();
 
@@ -68,10 +68,10 @@ namespace realtime.Controllers
         public async Task<IActionResult> ChatPage (string userId, string chatId)
         {
             if (string.IsNullOrEmpty (chatId)) return Redirect ("/discover");
-            var user = cacheService.GetUserFromCache (User.Identity.Name);
+            var user = inMemoryCacheService.GetUserFromCache (User.Identity.Name);
             var chatMessages = await context.DirectMessages.Where(op => op.ChattingId == chatId).AsNoTracking().ToListAsync ();
             var otherUser = await userManager.FindByIdAsync (userId);
-            await cacheService.PutUserIntoCache (otherUser);
+            await inMemoryCacheService.PutUserIntoCache (otherUser);
             var dmvmodel = new SingleChatViewModel ();
                 dmvmodel.UserName = otherUser.UserName;
                dmvmodel.OnlineStatus= await redisCache.CheckIfOnline(otherUser.UserName);
@@ -98,7 +98,7 @@ namespace realtime.Controllers
         {
             if (!string.IsNullOrWhiteSpace (chatId)) return RedirectToAction ("ChatPage", new { userId, chatId });
             if (string.IsNullOrEmpty (userId)) return LocalRedirect ("/discover");
-            var user = await cacheService.GetOrAddUserToCache (User.Identity.Name, userManager);
+            var user = await inMemoryCacheService.GetOrAddUserToCache (User.Identity.Name, userManager);
             var otherUser = await userManager.FindByIdAsync (userId);
             var directUserInteraction = new List<DirectUserInteractions> ();
             var chattingId = Guid.NewGuid ().ToString ().Substring (0, 4);
@@ -130,8 +130,8 @@ namespace realtime.Controllers
         public async Task<IActionResult> RealtimeInOutMessages ([FromBody] InOutMessagesViewModel model)
         {
             if (!ModelState.IsValid) return BadRequest ();
-            var sender = cacheService.GetUserFromCache (User.Identity.Name);
-            var receiver = await cacheService.GetOrAddUserToCache (model.Username, userManager);
+            var sender = inMemoryCacheService.GetUserFromCache (User.Identity.Name);
+            var receiver = await inMemoryCacheService.GetOrAddUserToCache (model.Username, userManager);
             //await hubContext.Clients.User()
             return Ok ();
         }
