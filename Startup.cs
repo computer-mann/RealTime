@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -29,13 +30,15 @@ namespace RealTime {
        
         public void ConfigureServices(IServiceCollection services)
         {
+            const string dbserver = "DbServerLocal";
             services.AddDbContext<AuthDbContext>(options => {
-                options.UseSqlServer (Configuration.GetConnectionString ("SqlServerLocal"));
+                
+                options.UseNpgsql(Configuration.GetConnectionString (dbserver));
             });
             
 
             services.AddDbContext<RealTimeContext>(options => {
-                options.UseSqlServer (Configuration.GetConnectionString ("SqlServerLocal"));
+                options.UseNpgsql(Configuration.GetConnectionString (dbserver));
             });
 
             services.AddIdentity<AppUser, IdentityRole<Guid>>()
