@@ -432,3 +432,4 @@
 {"Timestamp":"2020-08-05T20:42:48.8492159+00:00","Level":"Information","MessageTemplate":"Application is starting","Properties":{"MachineName":"EXE","ProcessId":12228,"ThreadId":1,"ApplicationName":"SuitStore.WebApplication"}}
 {"Timestamp":"2020-08-05T20:45:08.6047653+00:00","Level":"Information","MessageTemplate":"Application is starting","Properties":{"MachineName":"EXE","ProcessId":12408,"ThreadId":1,"ApplicationName":"SuitStore.WebApplication"}}
 {"Timestamp":"2020-08-05T21:07:58.6799269+00:00","Level":"Information","MessageTemplate":"Application is starting","Properties":{"MachineName":"EXE","ProcessId":14096,"ThreadId":1,"ApplicationName":"SuitStore.WebApplication"}}
+{"Timestamp":"2022-01-23T09:19:13.1371836+00:00","Level":"Information","MessageTemplate":"Application is starting","Properties":{"MachineName":"CM-RAZER","ProcessId":27920,"ThreadId":1,"ApplicationName":"SuitStore.WebApplication"}}
