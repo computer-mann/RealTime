@@ -22,8 +22,7 @@ namespace realtime.Models.DbContexts
         protected override void OnModelCreating (ModelBuilder builder)
         {
             base.OnModelCreating (builder);
-            builder.Entity<Groups> ().
-            HasCheckConstraint ("CannotExceed283Members", "NumberOfMembers <= 283");
+            builder.Entity<Groups>();
 
             /* builder.HasSequence<int> ("sqChattingId");
             builder.Entity<DirectUserInteractions> ().Property (o => o.ChattingId)

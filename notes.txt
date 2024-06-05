@@ -2,3 +2,6 @@
 <PackageReference Include="StackExchange.Redis" Version="2.1.58" />
 dotnet ef migrations add ChattingTime -c RealTimeContext -o Migrations/RealTime
 dotnet ef database update -c RealTimeContext
+
+Add-Migration -Name Initial -Context AuthDbContext -OutputDir Migrations/Auth
+Add-Migration -Name Initial -Context RealTimeContext -OutputDir Migrations/RealTime

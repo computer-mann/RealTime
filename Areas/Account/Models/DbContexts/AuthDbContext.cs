@@ -16,7 +16,7 @@ namespace realtime.Areas.Account.Models.DbContexts
         protected  override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<AppUser>().Property(op=>op.Id).HasColumnType("nvarchar(256)");
+            builder.Entity<AppUser>().Property(op=>op.Id).HasColumnType("varchar(256)");
         }
     }
 }
