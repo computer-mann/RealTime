@@ -37,16 +37,17 @@ namespace realtime.AllHubContexts
 
         }
 
-        public async Task SendRealTimeMessage (string username,string chatId, string message)
+        public async Task SendRealTimeMessage (string receiverUsername,string chatId, string message)
         {
-            logger.LogWarning("{chatId}",chatId);
-            var receiverUserId = (await cacheService.GetOrAddUserToCache(username, userManager)).Id;
+            //check if and how i can send files to receiver
+            logger.LogInformation("{chatId}",chatId);
+            var receiverUserId = (await cacheService.GetOrAddUserToCache(receiverUsername, userManager)).Id;
             await Clients.User(receiverUserId.ToString()).ReceiveMessage(message);
             var senderUserId=(cacheService.GetUserFromCache(Context.User.Identity.Name)).Id;
             await dbcontext.DirectMessages.AddAsync(new DirectMessages(){
                 ActualMessage=message,
-                SourceId=senderUserId,
-                TargetId=receiverUserId,
+                SenderId=senderUserId,
+                ReceipientId=receiverUserId,
                 DateSent=DateTime.Now,
                 ChattingId=chatId
             });

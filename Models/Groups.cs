@@ -14,7 +14,6 @@ namespace realtime.Models
         public string Image { get; set; }
         public DateTime DateCreated { get; set; }
         public AppUser Creator { get; set; }
-        public Guid CreatorId { get; set; }
         public List<UsersInGroups> GroupMembers { get; set; }
 
     }

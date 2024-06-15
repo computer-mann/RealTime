@@ -28,7 +28,7 @@ namespace realtime.Controllers
     public async Task<IActionResult> GroupsIndex()
     {
         var user = inMemoryCacheService.GetUserFromCache(User.Identity.Name);
-        var groupsJoined=await context.UsersInGroups.Where(op=>op.UserId == user.Id).OrderBy(ui=>ui.Timestamp)
+        var groupsJoined=await context.UsersInGroups.Where(op=>op.User.Id == user.Id).OrderBy(ui=>ui.Timestamp)
         .Include(guy=>guy.Group).ToListAsync();
         return View("Index",groupsJoined);
     }

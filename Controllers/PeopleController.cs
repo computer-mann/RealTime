@@ -41,14 +41,14 @@ namespace realtime.Controllers
             var people=await userManager.Users.Where(ip=>ip.UserName != user.UserName).ToListAsync();
             if(!people.Any()) return View(new List<DiscoverViewModel>());
             var discover=new List<DiscoverViewModel>();
-             var chatted=await context.UserToUserDMs.Where(op=>op.PrincipalUserId == user.Id)
-                .Select(pi=>new { pi.ChattingId ,  pi.OtherUserId }).AsNoTracking().ToListAsync(); 
+             var chatted=await context.UserToUserDMs.Where(op=>op.PrincipalUser == user)
+                .Select(pi=>new { pi.ChattingId ,  pi.OtherUser.Id }).AsNoTracking().ToListAsync(); 
 
             
             foreach (var person in people)
             {
                 string c=null;
-                var getChatId=chatted.Where(jk=>jk.OtherUserId == person.Id);
+                var getChatId=chatted.Where(jk=>jk.Id == person.Id);
                 if(getChatId.Count() > 0) c=getChatId.First().ChattingId; 
                 discover.Add(new DiscoverViewModel(){
                     UserId=person.Id,

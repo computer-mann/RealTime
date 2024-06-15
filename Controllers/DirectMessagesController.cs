@@ -14,6 +14,7 @@ using realtime.Services;
 using realtime.ViewModels;
 using RealTime.Models;
 using RealTime.Models.DbContexts;
+using UuidExtensions;
 
 namespace realtime.Controllers
 {
@@ -39,12 +40,11 @@ namespace realtime.Controllers
 
         }
 
-        [HttpGet]
-        [Route ("/messages")]
+        [HttpGet("/messages")]
         public async Task<IActionResult> Index ()
         {
             var user = await inMemoryCacheService.GetOrAddUserToCache (User.Identity.Name, userManager);
-            var allUserMessages = await context.UserToUserDMs.Where (io => io.PrincipalUserId == user.Id).
+            var allUserMessages = await context.UserToUserDMs.Where (io => io.PrincipalUser.Id == user.Id).
             Include (ui => ui.LatestDirectMessage).ToListAsync ();
 
             var messagesAll = new List<AllUserMessagesViewModel> ();
@@ -63,8 +63,7 @@ namespace realtime.Controllers
             return View ("AllOfTheUsersMessages", messagesAll);
         }
 
-        [HttpGet]
-        [Route ("/messages/chat/{userId}/{chatId}")]
+        [HttpGet("/messages/chat/{userId}/{chatId}")]
         public async Task<IActionResult> ChatPage (string userId, string chatId)
         {
             if (string.IsNullOrEmpty (chatId)) return Redirect ("/discover");
@@ -83,7 +82,7 @@ namespace realtime.Controllers
                 {
                     dmvmodel.Messages.Add(new Messages(){
                         Read=item.Read,
-                        SentBy=(user.Id == item.SourceId) ? user.UserName : otherUser.UserName,
+                        SentBy=(user.Id == item.SenderId) ? user.UserName : otherUser.UserName,
                         TheActualMessage=item.ActualMessage,
                         DateSent=item.DateSent
                     });
@@ -92,8 +91,7 @@ namespace realtime.Controllers
             return View ("SingleChat", dmvmodel);
         }
 
-        [HttpGet]
-        [Route ("/messages/fchat/{userId?}/{chatId?}")]
+        [HttpGet("/messages/fchat/{userId?}/{chatId?}")]
         public async Task<IActionResult> ToFirstTimeDirectMessage (string userId, string chatId)
         {
             if (!string.IsNullOrWhiteSpace (chatId)) return RedirectToAction ("ChatPage", new { userId, chatId });
@@ -101,17 +99,17 @@ namespace realtime.Controllers
             var user = await inMemoryCacheService.GetOrAddUserToCache (User.Identity.Name, userManager);
             var otherUser = await userManager.FindByIdAsync (userId);
             var directUserInteraction = new List<DirectUserInteractions> ();
-            var chattingId = Guid.NewGuid ().ToString ().Substring (0, 4);
+            var chattingId = Uuid7.Id25();
             directUserInteraction.Add (new DirectUserInteractions ()
             {
-                PrincipalUserId = user.Id,
-                    OtherUserId = otherUser.Id,
+                PrincipalUser = user,
+                    OtherUser = otherUser,
                     ChattingId = chattingId
             });
             directUserInteraction.Add (new DirectUserInteractions ()
             {
-                OtherUserId = user.Id,
-                    PrincipalUserId = otherUser.Id,
+                OtherUser = user,
+                    PrincipalUser = otherUser,
                     ChattingId = chattingId
             });
             await context.UserToUserDMs.AddRangeAsync (directUserInteraction);

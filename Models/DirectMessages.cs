@@ -19,9 +19,9 @@ namespace realtime.Models
         [MaxLength(283)]
         public string ActualMessage { get; set; }
 
-        public AppUser Source { get; set; }
+        public string SenderId { get; set; }
 
-        public AppUser Target { get; set; }
+        public string ReceipientId { get; set; }
         public bool Read { get; set; }
         public bool? DateRead { get; set; }
 
