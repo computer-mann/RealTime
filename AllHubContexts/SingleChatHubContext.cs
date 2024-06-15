@@ -59,11 +59,10 @@ namespace realtime.AllHubContexts
             //await Clients.Others.WelcomeAlert($"{Context.User.Identity.Name} has connected.");
             await base.OnConnectedAsync ();
         }
-        public override async Task OnDisconnectedAsync (Exception ex)
+        public override async Task OnDisconnectedAsync(Exception ex)
         {
             await redisCache.RemoveFromOnline (Context.User.Identity.Name);
-            logger.LogWarning ("Logging OnDisconnectedAsync out");
-            await base.OnDisconnectedAsync (ex);
+            await base.OnDisconnectedAsync(ex);
         }
     }
 }

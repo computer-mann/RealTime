@@ -7,6 +7,7 @@ namespace realtime.Models
 {
 
     //this table contains the actual messages sent by the linked users
+    ///I need this to be as fast as possible so no joins, just the actual message and the users id, no joins or lookups
     public class DirectMessages
     {
         [Key, DatabaseGenerated (DatabaseGeneratedOption.Identity)]
@@ -15,7 +16,7 @@ namespace realtime.Models
         [Required]
         public DateTime DateSent { get; set; }
 
-        [MaxLengthAttribute (283)]
+        [MaxLength(283)]
         public string ActualMessage { get; set; }
 
         public AppUser Source { get; set; }
