@@ -21,15 +21,6 @@ namespace realtime.Models
         public AppUser Source { get; set; }
 
         public AppUser Target { get; set; }
-
-        [MaxLength (50)]
-        [Required]
-        public Guid SourceId { get; set; }
-
-        [MaxLength (50)]
-        [Required]
-
-        public Guid TargetId { get; set; }
         public bool Read { get; set; }
         public bool? DateRead { get; set; }
 

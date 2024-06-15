@@ -9,11 +9,7 @@ namespace realtime.Models
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        
-        [ForeignKeyAttribute("CreatorId")]
         public AppUser Creator { get; set; }
-        public Guid CreatorId { get; set; }
-
         public IEnumerable<TopicChatter> Chatter { get; set; }
     }
 }

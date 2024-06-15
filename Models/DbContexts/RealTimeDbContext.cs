@@ -7,7 +7,7 @@ using RealTime.Models;
 
 namespace RealTime.Models.DbContexts
 {
-    public class RealTimeDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
+    public class RealTimeDbContext : IdentityDbContext<AppUser, IdentityRole<string>, string>
     {
         public RealTimeDbContext(DbContextOptions<RealTimeDbContext> options) : base(options)
         {

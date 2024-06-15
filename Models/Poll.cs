@@ -20,9 +20,7 @@ namespace realtime.Models
         public int OptionBCount { get; set; }
         public int OptionCCount { get; set; }
         public int OptionDCount { get; set; }
-        [ForeignKeyAttribute("CreatorId")]
         public AppUser Creator { get; set; }
-        public Guid CreatorId { get; set; }
         public string For { get; set; } //group or general
     }
 }
