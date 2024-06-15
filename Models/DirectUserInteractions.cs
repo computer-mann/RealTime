@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
-using RealTime.Areas.Account.Models;
+using RealTime.Models;
 
-namespace realtime.Models {
+namespace realtime.Models
+{
     public class DirectUserInteractions : BaseClass 
     {
 

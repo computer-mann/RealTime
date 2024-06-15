@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 using realtime.Interfaces;
 using realtime.Models;
-using realtime.Models.DbContexts;
 using realtime.Services;
-using RealTime.Areas.Account.Models;
+using RealTime.Models;
+using RealTime.Models.DbContexts;
 
 namespace realtime.AllHubContexts
 {
@@ -23,11 +23,11 @@ namespace realtime.AllHubContexts
         private readonly UserManager<AppUser> userManager;
 
         private readonly IRedisCache redisCache;
-        private readonly RealTimeContext dbcontext;
+        private readonly RealTimeDbContext dbcontext;
 
         public SingleChatHubContext (ILogger<SingleChatHubContext> logger,
             InMemoryCacheService cacheService, UserManager<AppUser> userManager,
-            IRedisCache redisCache, RealTimeContext dbcontext)
+            IRedisCache redisCache, RealTimeDbContext dbcontext)
         {
             this.dbcontext = dbcontext;
             this.redisCache = redisCache;

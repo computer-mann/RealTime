@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using realtime.Models.DbContexts;
 using realtime.Services;
-using RealTime.Areas.Account.Models;
+using RealTime.Models;
+using RealTime.Models.DbContexts;
 
 namespace realtime.Controllers
 {
@@ -13,9 +13,9 @@ namespace realtime.Controllers
     {
         private readonly UserManager<AppUser> userManager;
         private readonly InMemoryCacheService inMemoryCacheService;
-        private readonly RealTimeContext context;
+        private readonly RealTimeDbContext context;
         public GroupsController(UserManager<AppUser> userManager,
-        InMemoryCacheService inMemoryCacheService, RealTimeContext context)
+        InMemoryCacheService inMemoryCacheService, RealTimeDbContext context)
         {
             this.context = context;
             this.inMemoryCacheService = inMemoryCacheService;

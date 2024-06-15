@@ -2,8 +2,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using realtime.Services;
-using RealTime.Areas.Account.Models;
 using RealTime.Areas.Account.ViewModels;
+using RealTime.Models;
 
 namespace realtime.Areas.Account.Controllers
 {

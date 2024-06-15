@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using realtime.Interfaces;
-using realtime.Models.DbContexts;
 using realtime.Services;
 using realtime.ViewModels;
-using RealTime.Areas.Account.Models;
+using RealTime.Models;
+using RealTime.Models.DbContexts;
 
 namespace realtime.Controllers
 {
@@ -19,11 +19,11 @@ namespace realtime.Controllers
     public class PeopleController : Controller
     {
         private readonly InMemoryCacheService inMemoryCacheService;
-        private readonly RealTimeContext context;
+        private readonly RealTimeDbContext context;
         private readonly IRedisCache redis;
         private readonly UserManager<AppUser> userManager;
         public PeopleController(InMemoryCacheService inMemoryCacheService, IRedisCache redis,
-        UserManager<AppUser> userManager, RealTimeContext context)
+        UserManager<AppUser> userManager, RealTimeDbContext context)
         {
             this.userManager = userManager;
             this.context = context;

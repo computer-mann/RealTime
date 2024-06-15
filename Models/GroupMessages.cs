@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using RealTime.Areas.Account.Models;
+using RealTime.Models;
 
 namespace realtime.Models
 {

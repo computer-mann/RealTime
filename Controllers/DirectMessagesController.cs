@@ -10,10 +10,10 @@ using Microsoft.EntityFrameworkCore;
 using realtime.AllHubContexts;
 using realtime.Interfaces;
 using realtime.Models;
-using realtime.Models.DbContexts;
 using realtime.Services;
 using realtime.ViewModels;
-using RealTime.Areas.Account.Models;
+using RealTime.Models;
+using RealTime.Models.DbContexts;
 
 namespace realtime.Controllers
 {
@@ -23,12 +23,12 @@ namespace realtime.Controllers
     {
         private readonly InMemoryCacheService inMemoryCacheService;
         private readonly UserManager<AppUser> userManager;
-        private readonly RealTimeContext context;
+        private readonly RealTimeDbContext context;
         private readonly IHubContext<SingleChatHubContext, ISingleChatClient> hubContext;
         private readonly IRedisCache redisCache;
 
         public DirectMessagesController (InMemoryCacheService cacheService,
-            UserManager<AppUser> userManager, RealTimeContext context,
+            UserManager<AppUser> userManager, RealTimeDbContext context,
             IHubContext<SingleChatHubContext, ISingleChatClient> hubContext, IRedisCache redisCache)
         {
             this.hubContext = hubContext;

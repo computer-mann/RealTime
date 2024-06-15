@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Caching.Memory;
-using RealTime.Areas.Account.Models;
+using RealTime.Models;
 
 namespace realtime.Services
 {
