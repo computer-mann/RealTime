@@ -3,5 +3,4 @@
 dotnet ef migrations add ChattingTime -c RealTimeDbContext -o Migrations/RealTime
 dotnet ef database update -c RealTimeDbContext
 
-Add-Migration -Name Initial -Context AuthDbContext -OutputDir Migrations
-Add-Migration -Name Initial -Context RealTimeDbContext -OutputDir Migrations/RealTime
+Add-Migration -Name Initial -Context RealTimeDbContext -OutputDir Migrations

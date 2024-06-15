@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -45,16 +46,17 @@ namespace realtime.Controllers
         {
             var user = await inMemoryCacheService.GetOrAddUserToCache (User.Identity.Name, userManager);
             var allUserMessages = await context.UserToUserDMs.Where (io => io.PrincipalUser.Id == user.Id).
-            Include (ui => ui.LatestDirectMessage).ToListAsync ();
+            Include (ui => ui.LatestDirectMessage).Include(e=>e.OtherUser).ToListAsync ();
 
             var messagesAll = new List<AllUserMessagesViewModel> ();
             foreach (var message in allUserMessages)
             {
+                var lastMessage = message.LatestDirectMessage ?? new DirectMessages { ActualMessage="",DateSent=null};
                 messagesAll.Add (new AllUserMessagesViewModel ()
                 {
                     OtherUsersName = message.OtherUser.UserName,
-                        LastMessage = message.LatestDirectMessage.ActualMessage,
-                        LastMessageDateTime = message.LatestDirectMessage.DateSent.ToShortDateString (),
+                        LastMessage = lastMessage.ActualMessage,
+                        LastMessageDateTime = lastMessage.DateSent.ToString() ?? "",
                         Avatar = "",
                         NumberOfUnreadMessages = 0
                 });
@@ -84,7 +86,7 @@ namespace realtime.Controllers
                         Read=item.Read,
                         SentBy=(user.Id == item.SenderId) ? user.UserName : otherUser.UserName,
                         TheActualMessage=item.ActualMessage,
-                        DateSent=item.DateSent
+                        DateSent=item.DateSent.Value
                     });
                 }
             }

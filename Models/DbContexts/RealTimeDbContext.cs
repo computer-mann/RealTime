@@ -1,4 +1,6 @@
 using System;
+using System.Reflection;
+using System.Reflection.Emit;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +9,7 @@ using RealTime.Models;
 
 namespace RealTime.Models.DbContexts
 {
-    public class RealTimeDbContext : IdentityDbContext<AppUser, IdentityRole<string>, string>
+    public class RealTimeDbContext : IdentityDbContext<AppUser>
     {
         public RealTimeDbContext(DbContextOptions<RealTimeDbContext> options) : base(options)
         {
@@ -25,7 +27,7 @@ namespace RealTime.Models.DbContexts
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<AppUser>().Property(op => op.Id).HasColumnType("varchar(256)");
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }

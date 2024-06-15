@@ -27,12 +27,12 @@ namespace RealTime
         {
             const string dbserver = "DbServerLocal";
             services.AddDbContext<RealTimeDbContext>(options => {
-                
+                options.EnableSensitiveDataLogging();
                 options.UseNpgsql(Configuration.GetConnectionString (dbserver));
             });
             
 
-            services.AddIdentity<AppUser, IdentityRole<Guid>>()
+            services.AddIdentity<AppUser,IdentityRole>()
                 .AddEntityFrameworkStores<RealTimeDbContext>();
 
             services.Configure<IdentityOptions>(options=>

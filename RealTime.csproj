@@ -38,6 +38,5 @@
 
   <ItemGroup>
     <Folder Include="Areas\Account\Models\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>

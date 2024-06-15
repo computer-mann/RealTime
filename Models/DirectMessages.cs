@@ -14,17 +14,17 @@ namespace realtime.Models
         public int Id { get; set; }
 
         [Required]
-        public DateTime DateSent { get; set; }
+        public DateTime? DateSent { get; set; }
 
         [MaxLength(283)]
         public string ActualMessage { get; set; }
-
+        [MaxLength(25)]
         public string SenderId { get; set; }
-
+        [MaxLength(25)]
         public string ReceipientId { get; set; }
         public bool Read { get; set; }
         public bool? DateRead { get; set; }
-
+        [MaxLength(25)]
         public string ChattingId { get; set; }
 
     }

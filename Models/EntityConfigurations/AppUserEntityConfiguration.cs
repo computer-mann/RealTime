@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using UuidExtensions;
 
 namespace RealTime.Models.EntityConfigurations
 {
@@ -7,7 +8,8 @@ namespace RealTime.Models.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<AppUser> builder)
         {
-            builder.Property(op => op.Id).HasColumnType("varchar(25)");
+            builder.Property(op => op.Id).HasColumnType("char(25)");
+            builder.ToTable("AppUsers");
         }
     }
 }
