@@ -16,7 +16,7 @@ namespace realtime.Models.DbContexts
         public DbSet<Topic> Topics { get; set; } //4
         public DbSet<TopicChatter> TopicChatters { get; set; } //5
         public DbSet<UsersInGroups> UsersInGroups { get; set; } //6
-        public DbSet<DirectUserInteractions> UserToUserDMs { get; set; } //7
+        public DbSet<DirectUserInteractions> UserToUserDMs { get; set; }//7
         public DbSet<Groups> Groups { get; set; } //8
 
         protected override void OnModelCreating (ModelBuilder builder)

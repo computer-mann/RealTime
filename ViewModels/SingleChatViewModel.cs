@@ -7,7 +7,7 @@ namespace realtime.ViewModels
     {
         public string UserName { get; set; }
         public bool OnlineStatus { get; set; }
-        public List<Messages> Messages { get; set; }
+        public List<Messages> Messages { get; set; }=new List<Messages>();
         public string ChatId { get; set; }
     }
 

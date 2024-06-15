@@ -45,8 +45,8 @@ namespace realtime.AllHubContexts
             var senderUserId=(cacheService.GetUserFromCache(Context.User.Identity.Name)).Id;
             await dbcontext.DirectMessages.AddAsync(new DirectMessages(){
                 ActualMessage=message,
-                SourceID=senderUserId,
-                TargetID=receiverUserId,
+                SourceId=senderUserId,
+                TargetId=receiverUserId,
                 DateSent=DateTime.Now,
                 ChattingId=chatId
             });

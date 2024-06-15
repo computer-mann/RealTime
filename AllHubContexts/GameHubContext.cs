@@ -15,9 +15,9 @@ namespace realtime.AllHubContexts {
 
         public async Task SendCoordinates (int x, int y)
         {
-            logger.LogWarning("user is {name}", Context.User.Identity.Name);
-            logger.LogWarning("connectionId is {connectionId}", Context.ConnectionId);
-            logger.LogWarning("userIdentifier is {identifier}", Context.UserIdentifier);
+            logger.LogInformation("user is {name}", Context.User.Identity.Name);
+            logger.LogInformation("connectionId is {connectionId}", Context.ConnectionId);
+            logger.LogInformation("userIdentifier is {identifier}", Context.UserIdentifier);
            
             await Clients.Others.GetCoordinates(x, y);
         }

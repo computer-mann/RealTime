@@ -20,8 +20,8 @@ namespace RealTime.Migrations.RealTime
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DateSent = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ActualMessage = table.Column<string>(type: "character varying(283)", maxLength: 283, nullable: true),
-                    SourceID = table.Column<Guid>(type: "uuid", maxLength: 50, nullable: false),
-                    TargetID = table.Column<Guid>(type: "uuid", maxLength: 50, nullable: false),
+                    SourceId = table.Column<Guid>(type: "uuid", maxLength: 50, nullable: false),
+                    TargetId = table.Column<Guid>(type: "uuid", maxLength: 50, nullable: false),
                     Read = table.Column<bool>(type: "boolean", nullable: false),
                     DateRead = table.Column<bool>(type: "boolean", nullable: true),
                     ChattingId = table.Column<string>(type: "text", nullable: true)

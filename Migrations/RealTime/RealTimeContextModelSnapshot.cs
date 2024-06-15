@@ -46,11 +46,11 @@ namespace RealTime.Migrations.RealTime
                     b.Property<bool>("Read")
                         .HasColumnType("boolean");
 
-                    b.Property<Guid>("SourceID")
+                    b.Property<Guid>("SourceId")
                         .HasMaxLength(50)
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("TargetID")
+                    b.Property<Guid>("TargetId")
                         .HasMaxLength(50)
                         .HasColumnType("uuid");
 

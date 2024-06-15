@@ -37,7 +37,9 @@ namespace realtime.Controllers
         public async Task<IActionResult> Discover()
         {
             var user=await inMemoryCacheService.GetOrAddUserToCache(User.Identity.Name,userManager);
+            if (user == null) return Redirect("/login");
             var people=await userManager.Users.Where(ip=>ip.UserName != user.UserName).ToListAsync();
+            if(!people.Any()) return View(new List<DiscoverViewModel>());
             var discover=new List<DiscoverViewModel>();
              var chatted=await context.UserToUserDMs.Where(op=>op.PrincipalUserId == user.Id)
                 .Select(pi=>new { pi.ChattingId ,  pi.OtherUserId }).AsNoTracking().ToListAsync(); 

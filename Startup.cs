@@ -58,7 +58,7 @@ namespace RealTime {
             services.AddSingleton<InMemoryCacheService>();
 
             services.AddSession(session=>{
-                session.Cookie.Name="RealtimeSession";
+                session.Cookie.Name="aRealtimeSession";
                 session.IdleTimeout=TimeSpan.FromMinutes(10);
                 
             });
@@ -80,7 +80,7 @@ namespace RealTime {
 
             services.AddSignalR();
             services.ConfigureApplicationCookie(options=>{
-                options.Cookie.Name="RihannaCookieRealtime";
+                options.Cookie.Name="aRihannaCookieRealtime";
                 options.Cookie.MaxAge=TimeSpan.FromHours(2);
                 options.LoginPath="/login";
                 options.LogoutPath="/logout";
@@ -105,7 +105,7 @@ namespace RealTime {
                 app.UseHsts ();
             }
 
-            app.UseHttpsRedirection ();
+            //app.UseHttpsRedirection ();
             app.UseSession();
             app.UseStaticFiles ();
 

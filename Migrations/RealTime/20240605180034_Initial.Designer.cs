@@ -12,7 +12,7 @@ using realtime.Models.DbContexts;
 namespace RealTime.Migrations.RealTime
 {
     [DbContext(typeof(RealTimeContext))]
-    [Migration("20240605171700_Initial")]
+    [Migration("20240605180034_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -49,11 +49,11 @@ namespace RealTime.Migrations.RealTime
                     b.Property<bool>("Read")
                         .HasColumnType("boolean");
 
-                    b.Property<Guid>("SourceID")
+                    b.Property<Guid>("SourceId")
                         .HasMaxLength(50)
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("TargetID")
+                    b.Property<Guid>("TargetId")
                         .HasMaxLength(50)
                         .HasColumnType("uuid");
 

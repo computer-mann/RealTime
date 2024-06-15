@@ -12,7 +12,7 @@ using realtime.Areas.Account.Models.DbContexts;
 namespace RealTime.Migrations.Auth
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20240605171456_Initial")]
+    [Migration("20240605180020_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

@@ -18,19 +18,18 @@ namespace realtime.Models
         [MaxLengthAttribute (283)]
         public string ActualMessage { get; set; }
 
-        [ForeignKeyAttribute (nameof (SourceID))]
         public AppUser Source { get; set; }
 
-        [ForeignKey (nameof (TargetID))]
         public AppUser Target { get; set; }
 
         [MaxLength (50)]
         [Required]
-        public Guid SourceID { get; set; }
+        public Guid SourceId { get; set; }
 
         [MaxLength (50)]
         [Required]
-        public Guid TargetID { get; set; }
+
+        public Guid TargetId { get; set; }
         public bool Read { get; set; }
         public bool? DateRead { get; set; }
 

@@ -83,7 +83,7 @@ namespace realtime.Controllers
                 {
                     dmvmodel.Messages.Add(new Messages(){
                         Read=item.Read,
-                        SentBy=(user.Id == item.SourceID) ? user.UserName : otherUser.UserName,
+                        SentBy=(user.Id == item.SourceId) ? user.UserName : otherUser.UserName,
                         TheActualMessage=item.ActualMessage,
                         DateSent=item.DateSent
                     });
