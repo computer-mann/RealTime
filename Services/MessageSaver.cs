@@ -47,7 +47,7 @@ namespace RealTime.Services
                     await dbcontext.DirectMessages.AddAsync(message);
                 }
             }
-            await dbcontext.SaveChangesAsync();
+            await dbcontext.SaveChangesAsync();//add interceptor to see how many messages are saved
             
 
         }
