@@ -45,7 +45,7 @@ namespace realtime.AllHubContexts
             await Clients.User(receiverUserId.ToString()).ReceiveMessage(message);
             var senderUserId=(cacheService.GetUserFromCache(Context.User.Identity.Name)).Id;
             //need to send this to a channelwriter
-            //only save to the db when the channel has 40 messages
+            //only save to the db when the channel has 40 messages or every 5 seconds
             await dbcontext.DirectMessages.AddAsync(new DirectMessages(){
                 ActualMessage=message,
                 SenderId=senderUserId,

@@ -9,8 +9,10 @@ using Microsoft.Extensions.Hosting;
 using realtime.AllHubContexts;
 using realtime.Interfaces;
 using realtime.Services;
+using RealTime.HostedServices;
 using RealTime.Models;
 using RealTime.Models.DbContexts;
+using RealTime.Services;
 using StackExchange.Redis;
 
 namespace RealTime
@@ -79,6 +81,8 @@ namespace RealTime
             services.AddAuthentication();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddSingleton<IMessageSaver, MessageSaver>();
+            services.AddHostedService<PeriodicSaveToDbHostedService>();
         }
 
         
