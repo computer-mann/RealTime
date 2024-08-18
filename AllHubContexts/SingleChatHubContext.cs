@@ -12,6 +12,7 @@ using realtime.Models;
 using realtime.Services;
 using RealTime.Models;
 using RealTime.Models.DbContexts;
+using RealTime.Services;
 
 namespace realtime.AllHubContexts
 {
@@ -23,13 +24,13 @@ namespace realtime.AllHubContexts
         private readonly UserManager<AppUser> userManager;
 
         private readonly IRedisCache redisCache;
-        private readonly RealTimeDbContext dbcontext;
+        private readonly IMessageSaver _messageSaver;
 
         public SingleChatHubContext (ILogger<SingleChatHubContext> logger,
             InMemoryCacheService cacheService, UserManager<AppUser> userManager,
-            IRedisCache redisCache, RealTimeDbContext dbcontext)
+            IRedisCache redisCache, IMessageSaver messageSaver)
         {
-            this.dbcontext = dbcontext;
+            _messageSaver = messageSaver;
             this.redisCache = redisCache;
             this.userManager = userManager;
             this.cacheService = cacheService;
@@ -46,14 +47,13 @@ namespace realtime.AllHubContexts
             var senderUserId=(cacheService.GetUserFromCache(Context.User.Identity.Name)).Id;
             //need to send this to a channelwriter
             //only save to the db when the channel has 40 messages or every 5 seconds
-            await dbcontext.DirectMessages.AddAsync(new DirectMessages(){
+            await _messageSaver.AddMessageToChannel(new DirectMessages(){
                 ActualMessage=message,
                 SenderId=senderUserId,
                 ReceipientId=receiverUserId,
                 DateSent=DateTime.UtcNow,
                 ChattingId=chatId
             });
-            await dbcontext.SaveChangesAsync();
         }
 
         public override async Task OnConnectedAsync ()

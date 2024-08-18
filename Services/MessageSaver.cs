@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using realtime.Models;
 using RealTime.Models.DbContexts;
 using System.Threading.Channels;
@@ -10,6 +11,7 @@ namespace RealTime.Services
     {
         private readonly ChannelWriter<DirectMessages> _writer;
         private readonly IServiceScopeFactory _factory;
+        private readonly ILogger<MessageSaver> _logger;
         
         private Channel<DirectMessages> _channel = Channel.CreateBounded<DirectMessages>(new BoundedChannelOptions(100)
         {
@@ -20,9 +22,10 @@ namespace RealTime.Services
             
         });
 
-        public MessageSaver(IServiceScopeFactory factory)
+        public MessageSaver(IServiceScopeFactory factory, ILogger<MessageSaver> logger)
         {
             _factory = factory;
+            _logger = logger;
         }
 
         public async Task AddMessageToChannel(DirectMessages message)
@@ -34,6 +37,7 @@ namespace RealTime.Services
                     break;
                 }
             }
+            _logger.LogInformation("Message added to channel");
         }
 
         public async Task SaveMessages()

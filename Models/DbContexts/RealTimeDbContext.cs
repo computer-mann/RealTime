@@ -4,17 +4,23 @@ using System.Reflection.Emit;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.Extensions.Logging;
 using realtime.Models;
 using RealTime.Models;
+using RealTime.Models.Interceptors;
 
 namespace RealTime.Models.DbContexts
 {
     public class RealTimeDbContext : IdentityDbContext<AppUser>
     {
-        public RealTimeDbContext(DbContextOptions<RealTimeDbContext> options) : base(options)
+        private readonly ILoggerFactory _logger;
+        public RealTimeDbContext(DbContextOptions<RealTimeDbContext> options, ILoggerFactory logger) : base(options)
         {
-
+            _logger = logger;
         }
+
+
         public DbSet<DirectMessages> DirectMessages { get; set; } //1
         public DbSet<GroupMessages> GroupMessages { get; set; } //2
         public DbSet<Poll> Polls { get; set; } //3
@@ -29,5 +35,11 @@ namespace RealTime.Models.DbContexts
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.AddInterceptors(new SaveCountInterceptor(_logger));
+        }
+
     }
 }

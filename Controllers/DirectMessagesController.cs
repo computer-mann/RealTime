@@ -110,8 +110,8 @@ namespace realtime.Controllers
             });
             directUserInteraction.Add (new DirectUserInteractions ()
             {
-                OtherUser = user,
-                    PrincipalUser = otherUser,
+                OtherUser = otherUser,
+                    PrincipalUser = user,
                     ChattingId = chattingId
             });
             await context.UserToUserDMs.AddRangeAsync (directUserInteraction);
