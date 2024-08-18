@@ -12,6 +12,7 @@ using realtime.Services;
 using RealTime.HostedServices;
 using RealTime.Models;
 using RealTime.Models.DbContexts;
+using RealTime.Models.Handlers;
 using RealTime.Services;
 using StackExchange.Redis;
 
@@ -83,6 +84,8 @@ namespace RealTime
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddSingleton<IMessageSaver, MessageSaver>();
             services.AddHostedService<PeriodicSaveToDbHostedService>();
+            services.AddExceptionHandler<GlobalExceptionHandler>();
+            services.AddProblemDetails();
         }
 
         
@@ -90,7 +93,10 @@ namespace RealTime
 
             if (env.IsDevelopment()) 
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
+                //app.UseExceptionHandler();
+                app.UseExceptionHandler("/Home/Error");
+
 
             } else 
             {
