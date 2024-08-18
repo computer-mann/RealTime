@@ -10,9 +10,9 @@ $(function(){
         .then(() => console.log("Successful Connection"))
         .catch(error => console.log(err));
 
-    //signalrConn.on("WelcomeAlert",function(message){
-    //    alert(message)
-    //});
+    signalrConn.on("WelcomeAlert",function(message){
+        alert(message)
+    });
 
     /* document.addEventListener("click", function (event) {
         var shadeDiv = $('#shadeDiv');

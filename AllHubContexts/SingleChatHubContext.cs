@@ -44,11 +44,12 @@ namespace realtime.AllHubContexts
             var receiverUserId = (await cacheService.GetOrAddUserToCache(receiverUsername, userManager)).Id;
             await Clients.User(receiverUserId.ToString()).ReceiveMessage(message);
             var senderUserId=(cacheService.GetUserFromCache(Context.User.Identity.Name)).Id;
+            //need to send this to a channelwriter
             await dbcontext.DirectMessages.AddAsync(new DirectMessages(){
                 ActualMessage=message,
                 SenderId=senderUserId,
                 ReceipientId=receiverUserId,
-                DateSent=DateTime.Now,
+                DateSent=DateTime.UtcNow,
                 ChattingId=chatId
             });
             await dbcontext.SaveChangesAsync();
