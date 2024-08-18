@@ -114,7 +114,7 @@ namespace realtime.Controllers
                     PrincipalUser = user,
                     ChattingId = chattingId
             });
-            await context.UserToUserDMs.AddRangeAsync (directUserInteraction);
+            await context.UserToUserDMs.AddRangeAsync(directUserInteraction);
             await context.SaveChangesAsync ();
             var singleViewModel = new SingleChatViewModel ();
             singleViewModel.UserName = otherUser.UserName;

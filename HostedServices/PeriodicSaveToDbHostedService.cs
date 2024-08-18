@@ -19,6 +19,7 @@ namespace RealTime.HostedServices
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             PeriodicTimer timer = new PeriodicTimer(TimeSpan.FromSeconds(5));
+            int optimumNumberOfEfCoreDbSaves = 42;
             while (!stoppingToken.IsCancellationRequested)
             {
                 if (_messageSaver.GetChannelCount() < 1)
@@ -26,11 +27,12 @@ namespace RealTime.HostedServices
                     _logger.LogInformation("No messages to save");
                     await timer.WaitForNextTickAsync(stoppingToken);
                 }
-                else if(_messageSaver.GetChannelCount() >= 41 || (await timer.WaitForNextTickAsync(stoppingToken)))
+                else if(_messageSaver.GetChannelCount() >= optimumNumberOfEfCoreDbSaves || (await timer.WaitForNextTickAsync(stoppingToken)))
                 {
                     _logger.LogInformation("Saving messages to db");
+                    var countToSave= _messageSaver.GetChannelCount()>=optimumNumberOfEfCoreDbSaves ? optimumNumberOfEfCoreDbSaves : _messageSaver.GetChannelCount();
                    // Save to db
-                   await _messageSaver.SaveMessages();
+                   await _messageSaver.SaveMessages(countToSave);
                 }
                 
             }

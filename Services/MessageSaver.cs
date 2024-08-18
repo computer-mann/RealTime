@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using realtime.Models;
 using RealTime.Models.DbContexts;
+using System.Linq;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 
@@ -40,18 +41,22 @@ namespace RealTime.Services
             _logger.LogInformation("Message added to channel");
         }
 
-        public async Task SaveMessages()
+        public async Task SaveMessages(int numOfMessagesToSave)
         {
             using var scope = _factory.CreateScope();
             var dbcontext = scope.ServiceProvider.GetRequiredService<RealTimeDbContext>();
-            while (await _channel.Reader.WaitToReadAsync())
+            for(int i=0;i < numOfMessagesToSave; i++)
             {
-                while (_channel.Reader.TryRead(out var message))
-                {
-                    await dbcontext.DirectMessages.AddAsync(message);
-                }
+                dbcontext.DirectMessages.Add(await _channel.Reader.ReadAsync());
+            } 
+            if((await dbcontext.SaveChangesAsync())> 0)
+            {
+                _logger.LogInformation("Channel Messages saved to db");
             }
-            await dbcontext.SaveChangesAsync();//add interceptor to see how many messages are saved
+            else
+            {
+                _logger.LogInformation("no thing to save as channel is empty");
+            }
             
 
         }
@@ -63,7 +68,7 @@ namespace RealTime.Services
 
     public interface IMessageSaver
     {
-        public Task SaveMessages();
+        public Task SaveMessages(int numOfMessagesToSave);
         public Task AddMessageToChannel(DirectMessages messages);
         public int GetChannelCount();
     }

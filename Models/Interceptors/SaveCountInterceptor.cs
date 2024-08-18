@@ -19,7 +19,7 @@ namespace RealTime.Models.Interceptors
             InterceptionResult<int> result,
             CancellationToken cancellationToken = default)
         {
-            _logger.LogInformation("Saving count of {Count} entities", eventData.Context.ChangeTracker.Entries().Count());
+            _logger.LogInformation("From Interceptor: Saving count of {Count} entities", eventData.Context.ChangeTracker.Entries().Count());
             return ValueTask.FromResult(result);
         }
     }
