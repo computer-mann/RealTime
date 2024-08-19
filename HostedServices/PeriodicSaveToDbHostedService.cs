@@ -30,7 +30,7 @@ namespace RealTime.HostedServices
                 else if(_messageSaver.GetChannelCount() >= optimumNumberOfEfCoreDbSaves || (await timer.WaitForNextTickAsync(stoppingToken)))
                 {
                     _logger.LogInformation("Saving messages to db");
-                    var countToSave= _messageSaver.GetChannelCount()>=optimumNumberOfEfCoreDbSaves ? optimumNumberOfEfCoreDbSaves : _messageSaver.GetChannelCount();
+                    var countToSave= Math.Min(_messageSaver.GetChannelCount(), optimumNumberOfEfCoreDbSaves);
                    // Save to db
                    await _messageSaver.SaveMessages(countToSave);
                 }
